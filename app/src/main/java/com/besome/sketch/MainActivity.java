@@ -160,6 +160,17 @@ public class MainActivity extends BasePermissionAppCompatActivity {
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+final float diffScaledOffset = slideOffset * (1 - END_SCALE);
+            final float offsetScale = 1 - diffScaledOffset;
+            coordinator.setScaleX(offsetScale);
+            coordinator.setScaleY(offsetScale);
+
+            final float xOffset = drawerView.getWidth() * slideOffset;
+            final float xOffsetDiff = coordinator.getWidth() * diffScaledOffset / 2;
+            final float xTranslation = xOffset - xOffsetDiff;
+            coordinator.setTranslationX(xTranslation);
+
             }
 
             @Override
